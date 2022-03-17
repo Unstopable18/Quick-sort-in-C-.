@@ -1,0 +1,59 @@
+#include <iostream> 
+using namespace std;
+void quick_sort(int[],int,int);
+int partition(int[],int,int);
+int main()
+{
+    int arr[50],n,i;
+    cout<<"\n*******************************************\n";
+    cout<<"Enter Total No. of Elements: ";
+    cin>>n;
+    cout<<"\nEnter "<<n<<" Number of Elements:\n";
+    for(i=0; i<n; i++)
+    {
+        cin>>arr[i];
+    } 
+    quick_sort(arr,0,n-1);
+    cout<<"\n*******************************************\n";
+    cout<<"Array after sorting:\n";
+    for(i=0;i<n;i++)
+    cout<<" < "<<arr[i]<<" > ";
+    cout<<"\n*******************************************\n"; 
+    return 0;     
+}
+void quick_sort(int arr[],int l,int u)
+{
+    int j;
+    if(l<u)
+    {
+        j=partition(arr,l,u);
+        quick_sort(arr,l,j-1);
+        quick_sort(arr,j+1,u);
+    }
+}
+int partition(int arr[],int l,int u)
+{
+    int v,i,j,temp;
+    v=arr[l];
+    i=l;
+    j=u+1;
+    do
+    {
+        do
+        i++; 
+        while(arr[i]<v&&i<=u);
+        do
+        j--;
+        while(v<arr[j]);
+        if(i<j)
+        {
+            temp=arr[i];
+            arr[i]=arr[j];
+            arr[j]=temp;
+        }
+    }
+    while(i<j);
+    arr[l]=arr[j];
+    arr[j]=v;
+    return(j);
+}
